@@ -5,6 +5,7 @@
  */
 #define DEFAULT 0
 #define LOWER 1
+#define RAISE 2
 
 
 #include <behaviors.dtsi>
@@ -32,11 +33,28 @@
 	&kp TAB  &kp Q  &kp W  &kp E  &kp R  &kp T  &kp Y  &kp U  &kp I  &kp O  &kp P  &kp LBKT  &kp RBKT  &kp BSLH
 	&kp CLCK  &kp A  &kp S  &kp D  &kp F  &kp G  &kp H  &kp J  &kp K  &kp L  &kp SEMI &kp SQT           &kp RET
 	&kp LSHFT   &kp Z  &kp X  &kp C  &kp V  &kp B  &kp N  &kp M  &kp COMMA &kp DOT &kp FSLH           &kp RSHFT
-	&kp LCTRL &kp LGUI &kp LALT             &lt LOWER SPACE               &kp RALT  &kp RGUI  &mo 1   &kp RCTRL
+	&kp LCTRL &kp LGUI &kp LALT             &lt LOWER SPACE               &kp RALT  &kp RGUI  &mo 2   &kp RCTRL
 			>;
 		};
 
 		LOWER {
+// ------------------------------------------------------------------------------------------
+// | ESC | BR_UP | BR_DN  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |  0  |  -  |  =  |   BKSP   |
+// | TAB  |  Q  |  W  | VOL_UP  |  R  |  T  |  Y  |  U  |  I  |  O  |  P  |  [  |  ]  |   "|"   |
+// | CAPS  |  A  |  S  |VOL_DN |  F  |  G  |  H  |  J  |  K  |  L  |  ;  |  '  |     ENTER    |
+// |  SHIFT  |  Z  |  X  |  C  |  V  |  B  |  N  |  M  |  ,  |  .  |  /  |      SHIFT       |
+// |  CTL  |  WIN  |  ALT  |            SPACE              |  ALT  |  WIN  |  MO(1) |  CTL  |
+// ------------------------------------------------------------------------------------------
+			bindings = <
+	&gresc	 &kp C_BRI_UP  &kp C_BRI_DN    &none  &none      &none          &none          &none         &none   &none   &none  &none &none  &none
+	&kp TAB       &none    &none    &kp C_VOL_UP  &none  &none &none &none  &kp UP   &none   &none   &kp HOME  &kp END       &none 
+	&kp CLCK       &none  &kp C_PREV  &C_VOL_DN &kp C_NEXT &none &none &kp LEFT &kp DOWN   &kp RIGHT   &none   &none        &none
+	&kp LSHFT       &none    &none    &none   &none          &none          &none          &none          &none   &none   &none                &none
+	&kp LCTRL   &kp LGUI &kp LALT                            &trans                               &none       &none         &trans             &none
+			>;
+		};
+		
+		RAISE {
 // ------------------------------------------------------------------------------------------------
 // | BT CLR | F1  | F2  | F3  | F4  | F5  | F6  | F7  | F8  | F9  | F10  | F11 | F12 | EFFECT REV |
 // |  BT 1   |   |  UP |   | HUEUP | SATUP | BRIUP | SPDUP |   |     |    |     |     |           |
